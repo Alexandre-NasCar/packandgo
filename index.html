@@ -1069,13 +1069,41 @@ element.innerHTML = "👁️";
 
 function register(){
 
-const user = {
-name: document.getElementById("registerName").value,
-email: document.getElementById("registerEmail").value,
-password: document.getElementById("registerPassword").value
+const name = document.getElementById("registerName").value.trim();
+const email = document.getElementById("registerEmail").value.trim();
+const password = document.getElementById("registerPassword").value.trim();
+const cpf = document.getElementById("registerCPF").value.trim();
+
+if(name === "" || email === "" || password === "" || cpf === ""){
+alert("Por favor, preencha todos os campos.");
+return;
+}
+
+let users = JSON.parse(localStorage.getItem("users")) || [];
+
+const emailExists = users.some(user => user.email === email);
+const cpfExists = users.some(user => user.cpf === cpf);
+
+if(emailExists){
+alert("Este email já está cadastrado.");
+return;
+}
+
+if(cpfExists){
+alert("Este CPF já está cadastrado.");
+return;
+}
+
+const newUser = {
+name: name,
+email: email,
+password: password,
+cpf: cpf
 };
 
-localStorage.setItem("user", JSON.stringify(user));
+users.push(newUser);
+
+localStorage.setItem("users", JSON.stringify(users));
 
 alert("Cadastro realizado com sucesso!");
 
@@ -1083,21 +1111,25 @@ showLogin();
 
 }
 
+}
+
 function login(){
 
-const email =
-document.getElementById("loginEmail").value;
+const email = document.getElementById("loginEmail").value.trim();
+const password = document.getElementById("loginPassword").value.trim();
 
-const password =
-document.getElementById("loginPassword").value;
+if(email === "" || password === ""){
+alert("Por favor, preencha email e senha.");
+return;
+}
 
-const savedUser =
-JSON.parse(localStorage.getItem("user"));
+let users = JSON.parse(localStorage.getItem("users")) || [];
 
-if(
-savedUser.email === email &&
-savedUser.password === password
-){
+const savedUser = users.find(user => 
+user.email === email && user.password === password
+);
+
+if(savedUser){
 
 document.querySelector(".auth-container").style.display = "none";
 
@@ -1107,6 +1139,8 @@ document.getElementById("userArea").style.display = "flex";
 
 document.getElementById("userName").innerHTML =
 "👋 Olá, " + savedUser.name.split(" ")[0];
+
+localStorage.setItem("loggedUser", JSON.stringify(savedUser));
 
 }else{
 
@@ -1118,6 +1152,8 @@ alert("Email ou senha inválidos.");
 
 function logout(){
 
+localStorage.removeItem("loggedUser");
+
 document.querySelector(".auth-container").style.display = "flex";
 
 document.getElementById("siteContent").style.display = "none";
@@ -1127,6 +1163,27 @@ document.getElementById("userArea").style.display = "none";
 showLogin();
 
 }
+
+function checkLoggedUser(){
+
+const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
+
+if(loggedUser){
+
+document.querySelector(".auth-container").style.display = "none";
+
+document.getElementById("siteContent").style.display = "block";
+
+document.getElementById("userArea").style.display = "flex";
+
+document.getElementById("userName").innerHTML =
+"👋 Olá, " + loggedUser.name.split(" ")[0];
+
+}
+
+}
+
+checkLoggedUser();        
 
 /* SLIDER */
 
