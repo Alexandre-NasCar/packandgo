@@ -56,6 +56,7 @@ gap:10px;
 font-size:30px;
 font-weight:700;
 color:white;
+text-decoration:none;
 }
 
 .logo-icon{
@@ -380,7 +381,19 @@ margin-bottom:25px;
 .hero h1 span{
 color:#4cc9f0;
 }
+  
+.hero-logo-pack{
+color:#4cc9f0;
+}
 
+.hero-logo-and{
+color:white;
+}
+
+.hero-logo-go{
+color:#4cc9f0;
+}
+  
 .hero p{
 font-size:19px;
 opacity:0.92;
@@ -638,7 +651,7 @@ font-size:24px;
 
 <nav>
 
-<div class="logo">
+<a href="#home" class="logo">
 
 <div class="logo-icon">
 
@@ -663,15 +676,15 @@ stroke-linejoin="round">
 <span class="logo-pack">Pack</span><span class="logo-and">and</span><span class="logo-go">Go</span>
 </div>
 
-</div>
+</a>
 
 <div class="menu">
 
-<a href="#">Home</a>
-<a href="#">Destinos</a>
-<a href="#">Passeios</a>
-<a href="#">Blog</a>
-<a href="#">Contato</a>
+<a href="#home">Home</a>
+<a href="#meus-destinos">Meus Destinos</a>
+<a href="#inspiracoes">Inspirações</a>
+<a href="#blog">Blog</a>
+<a href="#suporte">Suporte</a>
 
 <div class="user-area" id="userArea">
 
@@ -829,7 +842,7 @@ Cadastrar
 
 <div class="site-content" id="siteContent">
 
-<section class="hero">
+<section class="hero" id="home">
 
 <div class="hero-content">
 
@@ -845,7 +858,7 @@ Cadastrar
 
 <h1>
 Explore o mundo com
-<span>PackandGo</span>
+<span class="hero-logo-pack">Pack</span><span class="hero-logo-and">and</span><span class="hero-logo-go">Go</span>
 </h1>
 
 <p>
@@ -870,7 +883,7 @@ Planejar Viagem
 
 <!-- DESTINOS -->
 
-<section>
+<section id="meus-destinos">
 
 <h2 class="section-title">
 Destinos em destaque
@@ -993,7 +1006,7 @@ Filtro Avançado
 </section>
 <!-- INSPIRAÇÃO -->
 
-<section class="quotes-section">
+<section class="quotes-section" id="inspiracoes">
 
 <h2 class="section-title" style="color:white;">
 Inspiração
